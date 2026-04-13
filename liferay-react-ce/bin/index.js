@@ -171,7 +171,7 @@ ${chalk.dim('https://github.com/laxitkhanpara/liferay-react-ce')}
 
   const { appName, reactVersion, installDeps } = answers;
   const projectPath = path.resolve(process.cwd(), appName);
-  const templatePath = path.join(__dirname, 'templates', 'custom-element');
+  const templatePath = path.join(__dirname, '..', 'templates', 'custom-element');
 
   // Guard: existing directory
   if (fs.existsSync(projectPath)) {
