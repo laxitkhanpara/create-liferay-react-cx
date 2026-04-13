@@ -3,141 +3,274 @@
 > ⚡ Zero-config CLI scaffold for **Liferay React Client Extensions** (custom element type).  
 > Powered by [Vite](https://vitejs.dev/) · Compatible with **Liferay 7.4 / DXP 2024.Q1+**
 
-[![npm version](https://img.shields.io/npm/v/liferay-react-ce?color=8B5CF6&label=npm)](https://www.npmjs.com/package/liferay-react-ce)
-[![license](https://img.shields.io/npm/l/liferay-react-ce?color=8B5CF6)](./LICENSE)
-[![node](https://img.shields.io/node/v/liferay-react-ce?color=8B5CF6)](https://nodejs.org)
+[![npm version](https://img.shields.io/npm/v/create-liferay-react-ce?color=8B5CF6&label=npm)](https://www.npmjs.com/package/create-liferay-react-ce)
+[![license](https://img.shields.io/npm/l/create-liferay-react-ce?color=8B5CF6)](./LICENSE)
+[![node](https://img.shields.io/node/v/create-liferay-react-ce?color=8B5CF6)](https://nodejs.org)
+
+---
+
+## Table of Contents
+
+- [What is a Liferay Client Extension?](#what-is-a-liferay-client-extension)
+- [Requirements](#requirements)
+- [Quick Start](#quick-start)
+- [All Ways to Use This CLI](#all-ways-to-use-this-cli)
+  - [Method 1 — npm create (Recommended)](#method-1--npm-create-recommended)
+  - [Method 2 — npx (No Install)](#method-2--npx-no-install)
+  - [Method 3 — Global Install](#method-3--global-install)
+- [Options & Flags](#options--flags)
+- [Interactive Mode](#interactive-mode)
+- [Generated Project Structure](#generated-project-structure)
+- [Development Workflow](#development-workflow)
+- [React Version Compatibility](#react-version-compatibility)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
 ## What is a Liferay Client Extension?
 
-A **Client Extension** (CE) is the modern way to extend Liferay DXP / CE without touching the core portal. A *Custom Element* CE lets you embed any React (or vanilla JS) component directly on a Liferay page as a standard Web Component — no OSGi, no portlet Java code required.
+A **Client Extension (CE)** is the modern, decoupled way to extend Liferay DXP / Community Edition — no Java, no OSGi, no portal restarts required.
+
+A **Custom Element** CE wraps your React app as a standard Web Component (`<my-widget />`), which Liferay embeds directly on any page. This CLI scaffolds everything you need to build, preview, and deploy one in seconds.
+
+---
+
+## Requirements
+
+Before you start, make sure you have:
+
+| Requirement | Version |
+|---|---|
+| Node.js | ≥ 18.0.0 |
+| npm | ≥ 9.0.0 |
+| [Liferay Workspace](https://learn.liferay.com/dxp/latest/en/building-applications/tooling/liferay-workspace/what-is-liferay-workspace.html) | For `gradlew deploy` |
+
+> **Note:** The generated project must sit inside a Liferay Workspace at `[workspace]/client-extensions/my-widget/` for Gradle deployment to work.
 
 ---
 
 ## Quick Start
 
 ```bash
-npx liferay-react-ce my-widget
+npm create liferay-react-ce my-widget
 cd my-widget
-npm run dev
+../../gradlew deploy
 ```
 
-Or use the interactive wizard (no arguments):
+That's it. Your custom element is live in Liferay. 🚀
 
+---
+
+## All Ways to Use This CLI
+
+### Method 1 — `npm create` (Recommended)
+
+`npm create` is the standard npm convention for scaffolding tools (like `npm create vite`, `npm create react-app`). It automatically resolves `create-liferay-react-ce` under the hood.
+
+**With a project name (fastest):**
 ```bash
-npx liferay-react-ce
+npm create liferay-react-ce my-widget
+```
+
+**With a specific React version:**
+```bash
+npm create liferay-react-ce -- --name my-widget --react-version 18.2.0
+```
+> ⚠️ Note the `--` before flags — this is required when using `npm create` with named options, so npm passes them through to the CLI correctly.
+
+**Interactive wizard (no arguments):**
+```bash
+npm create liferay-react-ce
 ```
 
 ---
 
-## Usage
+### Method 2 — `npx` (No Install)
 
+Use `npx` to run the CLI directly without installing anything globally. The full package name `create-liferay-react-ce` is used here.
+
+**With a project name:**
+```bash
+npx create-liferay-react-ce my-widget
 ```
-liferay-react-ce [app-name] [react-version]
-liferay-react-ce --name <app-name> [--react-version <version>]
+
+**With a specific React version:**
+```bash
+npx create-liferay-react-ce --name my-widget --react-version 18.2.0
 ```
 
-### Options
+**Interactive wizard:**
+```bash
+npx create-liferay-react-ce
+```
 
-| Flag | Short | Description |
-|------|-------|-------------|
-| `--name` | `-n` | App name in **kebab-case** (e.g. `my-widget`) |
-| `--react-version` | `-r` | React version (default: `16.12.0`) |
-| `--help` | `-h` | Show help |
-| `--version` | `-v` | Print version |
+---
 
-### Examples
+### Method 3 — Global Install
+
+Install once, use anywhere. After a global install, you can use the short alias `liferay-react-ce` from any directory.
+
+**Step 1 — Install globally:**
+```bash
+npm install -g create-liferay-react-ce
+```
+
+**Step 2 — Use it:**
+```bash
+liferay-react-ce my-widget
+liferay-react-ce --name my-widget --react-version 18.2.0
+liferay-react-ce --help
+```
+
+> **Tip:** To update a globally installed version later, run `npm update -g create-liferay-react-ce`.
+
+---
+
+## Options & Flags
+
+| Flag | Short | Description | Default |
+|------|-------|-------------|---------|
+| `--name` | `-n` | App name in **kebab-case** | _(prompted)_ |
+| `--react-version` | `-r` | React version to scaffold with | `16.12.0` |
+| `--help` | `-h` | Print help and exit | — |
+| `--version` | `-v` | Print version and exit | — |
+
+**App name rules:** lowercase letters, numbers, and hyphens only. Must start with a letter. Examples: `my-widget`, `employee-portal`, `news-feed`.
+
+---
+
+## Interactive Mode
+
+Run the CLI with no arguments to enter the interactive wizard:
 
 ```bash
-# Positional — fastest
-npx liferay-react-ce my-widget
-
-# Named flags
-npx liferay-react-ce --name my-widget --react-version 18.2.0
-
-# Interactive wizard
-npx liferay-react-ce
+npm create liferay-react-ce
+# or
+npx create-liferay-react-ce
 ```
+
+You will be asked:
+
+1. **App name** — enter a kebab-case name for your widget
+2. **React version** — choose from a list or enter a custom version:
+   - `16.12.0` — Liferay 7.4 / DXP classic
+   - `18.2.0` — Liferay 7.4 U45+ / DXP 2024.Q1+
+   - `Custom` — enter any valid semver (e.g. `17.0.2`)
+3. **Install dependencies now?** — yes/no confirm
 
 ---
 
 ## Generated Project Structure
 
+Running the CLI creates the following layout:
+
 ```
 my-widget/
-├── client-extension.yaml     ← Liferay CE descriptor
-├── index.html                ← Vite dev-server entry
-├── package.json
-├── vite.config.js
-├── eslint.config.js
+├── client-extension.yaml     ← Liferay CE descriptor (auto-configured)
+├── index.html                ← Vite dev-server entry point
+├── package.json              ← Project dependencies & scripts
+├── vite.config.js            ← Vite build config
+├── eslint.config.js          ← ESLint flat config
 └── src/
-    ├── main.jsx              ← Web Component bootstrap
-    ├── App.jsx               ← React component
-    ├── index.css
+    ├── main.jsx              ← Web Component registration (HTMLElement)
+    ├── App.jsx               ← Your React component — start editing here
+    ├── index.css             ← Global reset (shadow DOM scoped)
     └── assets/
-        └── style.css         ← Shadow-DOM scoped styles
+        └── style.css         ← Component styles (shadow DOM isolated)
 ```
 
-### `client-extension.yaml` — what it does
+### What `client-extension.yaml` does
+
+This file tells Liferay how to register and display your widget:
 
 ```yaml
 my-widget:
-  type: customElement          # renders as <my-widget> HTML element
-  htmlElementName: my-widget
+  type: customElement          # renders as <my-widget> on Liferay pages
+  htmlElementName: my-widget   # the HTML tag name
   urls:
-    - assets/*.js              # built JS bundle
+    - assets/*.js              # built JS bundle from vite-build/
   cssURLs:
-    - assets/*.css             # built CSS bundle
-  useESM: true
-  instanceable: false
+    - assets/*.css             # built CSS bundle from vite-build/
+  useESM: true                 # ES module support
+  instanceable: false          # one instance per page
   portletCategoryName: category.client-extensions
 ```
+
+All values are automatically replaced with your app name during scaffolding.
 
 ---
 
 ## Development Workflow
 
+### ✅ Deploying to Liferay (Standard Workflow)
+
+When working inside a Liferay Workspace, **you only need one command**. Gradle handles the npm install, Vite build, and deployment automatically — no manual `npm run build` needed.
+
+**1. Navigate into your project:**
 ```bash
-# Deploy to your Liferay instance (from the workspace root)
+cd my-widget
+```
+
+**2. Deploy directly to Liferay** (from the Liferay Workspace root):
+```bash
 ../../gradlew deploy
 ```
 
-> **Tip:** Your Liferay workspace must live inside a [Liferay Workspace Gradle project](https://learn.liferay.com/dxp/latest/en/building-applications/tooling/liferay-workspace/what-is-liferay-workspace.html).  
-> Place the generated project at `[workspace]/client-extensions/my-widget/`.
+That's it. Under the hood, Gradle will:
+- Run `npm install` (if `node_modules` is missing)
+- Run `npm run build` (Vite compiles to `vite-build/`)
+- Copy the output into Liferay's deploy folder
+- Hot-reload the bundle in your running Liferay instance
+
+> After deployment, go to **Liferay Admin → Fragments and Resources → Client Extensions** to find and add your widget to a page.
+
+---
+
+### 🖥️ Local Preview (Optional)
+
+If you want to preview your React component in a browser **outside of Liferay** during development (faster feedback, hot reload), you can use Vite's dev server:
+
+```bash
+npm install       # only needed once
+npm run dev       # starts at http://localhost:5173
+```
+
+> This is purely optional and useful for rapid UI development. The component will render standalone — not inside Liferay's portal context.
 
 ---
 
 ## React Version Compatibility
 
-| React version | Liferay version |
-|:---:|:---|
-| `16.12.0` | 7.4 GA / DXP classic (bundled React) |
-| `18.2.0` | 7.4 U45+ / DXP 2024.Q1+ (isolated shadow DOM) |
+| React Version | Liferay Compatibility | Notes |
+|:---:|:---|:---|
+| `16.12.0` | Liferay 7.4 GA / DXP classic | Uses Liferay's bundled React. Smaller bundle. |
+| `18.2.0` | Liferay 7.4 U45+ / DXP 2024.Q1+ | Fully isolated in shadow DOM. Concurrent features. |
 
-The CLI lets you choose during scaffolding or pass `--react-version`.
-
----
-
-## Requirements
-
-- **Node.js** ≥ 18
-- **npm** ≥ 9
-- A [Liferay Workspace](https://learn.liferay.com/dxp/latest/en/building-applications/tooling/liferay-workspace.html) (for `gradlew deploy`)
+Not sure which to pick? Use `16.12.0` for maximum compatibility with older Liferay instances, or `18.2.0` for newer deployments that support isolated client extensions.
 
 ---
 
 ## Contributing
 
-Pull requests are welcome!  
-Please open an issue first to discuss what you'd like to change.
+Contributions, issues, and feature requests are welcome!
 
 ```bash
+# 1. Clone the repo
 git clone https://github.com/laxitkhanpara/liferay-react-ce.git
 cd liferay-react-ce
+
+# 2. Install dependencies
 npm install
-node index.js my-test-app
+
+# 3. Test locally
+node bin/index.js my-test-app
+
+# 4. Clean up
+rm -rf my-test-app
 ```
+
+Please open an [issue](https://github.com/laxitkhanpara/liferay-react-ce/issues) first to discuss any significant changes.
 
 ---
 
@@ -149,6 +282,7 @@ node index.js my-test-app
 
 ## Links
 
-- 📦 [npm package](https://www.npmjs.com/package/liferay-react-ce)
+- 📦 [npm package](https://www.npmjs.com/package/create-liferay-react-ce)
 - 🐛 [Report a bug](https://github.com/laxitkhanpara/liferay-react-ce/issues)
 - 📖 [Liferay Client Extensions docs](https://learn.liferay.com/dxp/latest/en/building-applications/client-extensions.html)
+- 🏗️ [Liferay Workspace docs](https://learn.liferay.com/dxp/latest/en/building-applications/tooling/liferay-workspace/what-is-liferay-workspace.html)

@@ -1,12 +1,12 @@
 {
   "name": "liferay-react-ce",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "CLI scaffold tool to generate Liferay React Client Extension (custom element) projects — zero-config, Vite-powered, Liferay 7.4+ compatible.",
   "type": "module",
   "main": "./bin/index.js",
   "bin": {
-    "liferay-react-ce": "./bin/index.js",
-    "create-liferay-ce": "./bin/index.js"
+    "create-liferay-react-ce": "./bin/index.js",
+    "liferay-react-ce": "./bin/index.js"
   },
   "keywords": [
     "liferay",
@@ -45,8 +45,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "test": "echo \"No tests yet\" && exit 0",
-    "prepublishOnly": "node --input-type=module <<< 'import \"./index.js\"' || true"
+    "test": "echo \"No tests yet\" && exit 0"
   },
   "dependencies": {
     "chalk": "^5.3.0",

@@ -10,7 +10,9 @@ import { execa } from 'execa';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const PKG_VERSION = '1.0.0';
+const commandName = path.basename(process.argv[1]);
+
+const PKG_VERSION = '1.0.1';
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -31,37 +33,37 @@ function printBanner() {
   console.log('');
   console.log(
     chalk.bold.hex('#4B0082')(
-      '  ██╗     ██╗███████╗███████╗██████╗  █████╗ ██╗   ██╗'
+      '  ██      ███████ ███████ ███████ █████    ███     ██   ██ '
     )
   );
   console.log(
     chalk.bold.hex('#6A0DAD')(
-      '  ██║     ██║██╔════╝██╔════╝██╔══██╗██╔══██╗╚██╗ ██╔╝'
+      '  ██        ██   ██      ██      ██  ██  ██ ██    ██   ██ '
     )
   );
   console.log(
     chalk.bold.hex('#8B00FF')(
-      '  ██║     ██║█████╗  █████╗  ██████╔╝███████║ ╚████╔╝ '
+      '  ██        ██   █████   █████   █████   ██ ██ ██   ███    '
     )
   );
   console.log(
     chalk.bold.hex('#9B30FF')(
-      '  ██║     ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║  ╚██╔╝  '
+      '  ██        ██   ██      ██      ██  ██  ██  ████    ██    '
     )
   );
   console.log(
     chalk.bold.hex('#B44FFF')(
-      '  ███████╗██║██║     ███████╗██║  ██║██║  ██║   ██║   '
+      '  ███████ ███████ ██      ███████ ██   ██ ██   ███    ██    '
     )
   );
   console.log(
     chalk.bold.hex('#CC6FFF')(
-      '  ╚══════╝╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   '
+      '                                                                '
     )
   );
   console.log('');
   console.log(
-    chalk.hex('#888')(`  React Client Extension Generator  `) +
+    chalk.hex('#888')(`  liferay-react-ce — Scaffold a Liferay React Client Extension  `) +
       chalk.dim(`v${PKG_VERSION}`)
   );
   console.log(
@@ -84,17 +86,15 @@ ${chalk.bold('liferay-react-ce')} — Scaffold a Liferay React Client Extension
 ${chalk.bold('USAGE')}
   liferay-react-ce [app-name] [react-version]
   liferay-react-ce --name <app-name> [--react-version <version>]
-
-${chalk.bold('OPTIONS')}
   -n, --name            App name in kebab-case  (e.g. my-widget)
   -r, --react-version   React version to use    (default: 16.12.0)
   -v, --version         Print version
   -h, --help            Show this help
 
 ${chalk.bold('EXAMPLES')}
-  npx liferay-react-ce my-widget
-  npx liferay-react-ce --name my-widget --react-version 18.2.0
-  npx liferay-react-ce                        # interactive mode
+  npm create liferay-react-ce my-widget
+  npm create liferay-react-ce -- --name my-widget --react-version 18.2.0
+  npm create liferay-react-ce                        # interactive mode
 
 ${chalk.bold('AFTER SCAFFOLDING')}
   cd <app-name>
