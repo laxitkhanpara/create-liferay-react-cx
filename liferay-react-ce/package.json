@@ -1,0 +1,57 @@
+{
+  "name": "liferay-react-ce",
+  "version": "1.0.0",
+  "description": "CLI scaffold tool to generate Liferay React Client Extension (custom element) projects — zero-config, Vite-powered, Liferay 7.4+ compatible.",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "liferay-react-ce": "./index.js",
+    "create-liferay-ce": "./index.js"
+  },
+  "keywords": [
+    "liferay",
+    "client-extension",
+    "custom-element",
+    "react",
+    "vite",
+    "scaffold",
+    "cli",
+    "liferay-dxp",
+    "liferay-portal",
+    "web-component"
+  ],
+  "author": {
+    "name": "Laxit Khanpara",
+    "email": "laxitkhanpara3646@gmail.com",
+    "url": "https://github.com/laxitkhanpara"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laxitkhanpara/liferay-react-ce.git"
+  },
+  "bugs": {
+    "url": "https://github.com/laxitkhanpara/liferay-react-ce/issues"
+  },
+  "homepage": "https://github.com/laxitkhanpara/liferay-react-ce#readme",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "files": [
+    "index.js",
+    "templates/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "echo \"No tests yet\" && exit 0",
+    "prepublishOnly": "node --input-type=module <<< 'import \"./index.js\"' || true"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "execa": "^9.6.1",
+    "fs-extra": "^11.2.0",
+    "inquirer": "^9.2.12"
+  }
+}

@@ -1,0 +1,47 @@
+/* ── Shadow DOM reset ─────────────────────────────────────────────────────── */
+
+:host {
+  all: initial;
+  display: block;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #1e1b4b;
+}
+
+/* ── Layout ───────────────────────────────────────────────────────────────── */
+
+.lce-container {
+  width: 100%;
+  min-height: 100px;
+  padding: 24px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+}
+
+.lce-card {
+  width: min(100%, 500px);
+  padding: 36px 40px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 8px 32px rgba(109, 40, 217, 0.12);
+  text-align: center;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+
+.lce-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #4c1d95, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 10px;
+}
+
+.lce-subtitle {
+  color: #6b7280;
+  font-size: 14px;
+}

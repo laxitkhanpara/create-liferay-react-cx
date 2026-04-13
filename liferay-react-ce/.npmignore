@@ -1,0 +1,23 @@
+# Development
+.git/
+.github/
+*.7z
+*.zip
+*.tar.gz
+
+# Tests & CI
+tests/
+test/
+*.test.js
+*.spec.js
+.github/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Misc
+node_modules/
+npm-debug.log*
