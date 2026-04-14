@@ -10,7 +10,7 @@ import { execa } from 'execa';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const commandName = path.basename(process.argv[1]);
+const commandName = 'create-liferay-react-cx';
 
 const PKG_VERSION = '1.0.1';
 
@@ -31,76 +31,88 @@ const positionalArgs = args.filter((a) => !a.startsWith('-'));
 
 function printBanner() {
   console.log('');
+
   console.log(
-    chalk.bold.hex('#4B0082')(
-      '  ██      ███████ ███████ ███████ █████    ███     ██   ██ '
+    chalk.bold.hex('#0B5FFF')(
+      '   ██╗     ██╗███████╗███████╗██████╗  █████╗ ██╗   ██╗'
     )
   );
   console.log(
-    chalk.bold.hex('#6A0DAD')(
-      '  ██        ██   ██      ██      ██  ██  ██ ██    ██   ██ '
+    chalk.bold.hex('#0B5FFF')(
+      '   ██║     ██║██╔════╝██╔════╝██╔══██╗██╔══██╗╚██╗ ██╔╝'
     )
   );
   console.log(
-    chalk.bold.hex('#8B00FF')(
-      '  ██        ██   █████   █████   █████   ██ ██ ██   ███    '
+    chalk.bold.hex('#0B5FFF')(
+      '   ██║     ██║█████╗  █████╗  ██████╔╝███████║ ╚████╔╝ '
     )
   );
   console.log(
-    chalk.bold.hex('#9B30FF')(
-      '  ██        ██   ██      ██      ██  ██  ██  ████    ██    '
+    chalk.bold.hex('#0B5FFF')(
+      '   ██║     ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║  ╚██╔╝  '
     )
   );
   console.log(
-    chalk.bold.hex('#B44FFF')(
-      '  ███████ ███████ ██      ███████ ██   ██ ██   ███    ██    '
+    chalk.bold.hex('#0B5FFF')(
+      '   ███████╗██║██║     ███████╗██║  ██║██║  ██║   ██║   '
     )
   );
   console.log(
-    chalk.bold.hex('#CC6FFF')(
-      '                                                                '
+    chalk.bold.hex('#0B5FFF')(
+      '   ╚══════╝╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   '
     )
   );
+
   console.log('');
+
   console.log(
-    chalk.hex('#888')(`  liferay-react-ce — Scaffold a Liferay React Client Extension  `) +
-      chalk.dim(`v${PKG_VERSION}`)
+    chalk.bold('   Liferay React Client Extension')
   );
+
   console.log(
-    chalk.dim('  ─────────────────────────────────────────────────────')
+    chalk.dim('   Official-style scaffolding tool for Liferay DXP')
   );
+
+  console.log(
+    chalk.dim(`   Version: ${PKG_VERSION}`)
+  );
+
+  console.log(
+    chalk.dim('   ─────────────────────────────────────────────')
+  );
+
   console.log('');
 }
 
 // ─── Version / Help ──────────────────────────────────────────────────────────
 
 if (hasFlag(['--version', '-v'])) {
-  console.log(`liferay-react-ce v${PKG_VERSION}`);
+  console.log(`create-liferay-react-cx v${PKG_VERSION}`);
   process.exit(0);
 }
 
 if (hasFlag(['--help', '-h'])) {
   console.log(`
-${chalk.bold('liferay-react-ce')} — Scaffold a Liferay React Client Extension
+${chalk.bold('create-liferay-react-cx')} — Scaffold a Liferay React Client Extension
 
 ${chalk.bold('USAGE')}
-  liferay-react-ce [app-name] [react-version]
-  liferay-react-ce --name <app-name> [--react-version <version>]
+  create-liferay-react-cx [app-name] [react-version]
+  create-liferay-react-cx --name <app-name> [--react-version <version>]
   -n, --name            App name in kebab-case  (e.g. my-widget)
   -r, --react-version   React version to use    (default: 16.12.0)
   -v, --version         Print version
   -h, --help            Show this help
 
 ${chalk.bold('EXAMPLES')}
-  npm create liferay-react-ce my-widget
-  npm create liferay-react-ce -- --name my-widget --react-version 18.2.0
-  npm create liferay-react-ce                        # interactive mode
+  npx create-liferay-react-cx my-widget
+  npx create-liferay-react-cx --name my-widget --react-version 18.2.0
+  npx create-liferay-react-cx                        # interactive mode
 
 ${chalk.bold('AFTER SCAFFOLDING')}
   cd <app-name>
   ../../gradlew deploy    # deploy to Liferay
 
-${chalk.dim('https://github.com/laxitkhanpara/liferay-react-ce')}
+${chalk.dim('https://github.com/laxitkhanpara/create-liferay-react-cx')}
 `);
   process.exit(0);
 }

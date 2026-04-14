@@ -1,11 +1,11 @@
-# liferay-react-ce
+# create-liferay-react-cx
 
 > ⚡ Zero-config CLI scaffold for **Liferay React Client Extensions** (custom element type).  
 > Powered by [Vite](https://vitejs.dev/) · Compatible with **Liferay 7.4 / DXP 2024.Q1+**
 
-[![npm version](https://img.shields.io/npm/v/create-liferay-react-ce?color=8B5CF6&label=npm)](https://www.npmjs.com/package/create-liferay-react-ce)
-[![license](https://img.shields.io/npm/l/create-liferay-react-ce?color=8B5CF6)](./LICENSE)
-[![node](https://img.shields.io/node/v/create-liferay-react-ce?color=8B5CF6)](https://nodejs.org)
+[![npm version](https://img.shields.io/npm/v/create-liferay-react-cx?color=8B5CF6&label=npm)](https://www.npmjs.com/package/create-liferay-react-cx)
+[![license](https://img.shields.io/npm/l/create-liferay-react-cx?color=8B5CF6)](./LICENSE)
+[![node](https://img.shields.io/node/v/create-liferay-react-cx?color=8B5CF6)](https://nodejs.org)
 
 ---
 
@@ -17,7 +17,6 @@
 - [All Ways to Use This CLI](#all-ways-to-use-this-cli)
   - [Method 1 — npm create (Recommended)](#method-1--npm-create-recommended)
   - [Method 2 — npx (No Install)](#method-2--npx-no-install)
-  - [Method 3 — Global Install](#method-3--global-install)
 - [Options & Flags](#options--flags)
 - [Interactive Mode](#interactive-mode)
 - [Generated Project Structure](#generated-project-structure)
@@ -53,7 +52,7 @@ Before you start, make sure you have:
 ## Quick Start
 
 ```bash
-npm create liferay-react-ce my-widget
+npx create-liferay-react-cx my-widget
 cd my-widget
 ../../gradlew deploy
 ```
@@ -66,64 +65,44 @@ That's it. Your custom element is live in Liferay. 🚀
 
 ### Method 1 — `npm create` (Recommended)
 
-`npm create` is the standard npm convention for scaffolding tools (like `npm create vite`, `npm create react-app`). It automatically resolves `create-liferay-react-ce` under the hood.
+`npm create` is the standard npm convention for scaffolding tools (like `npm create vite`, `npm create react-app`). It automatically resolves `create-liferay-react-cx` under the hood.
 
 **With a project name (fastest):**
 ```bash
-npm create liferay-react-ce my-widget
+npm create liferay-react-cx my-widget
 ```
 
 **With a specific React version:**
 ```bash
-npm create liferay-react-ce -- --name my-widget --react-version 18.2.0
+npm create liferay-react-cx -- --name my-widget --react-version 18.2.0
 ```
 > ⚠️ Note the `--` before flags — this is required when using `npm create` with named options, so npm passes them through to the CLI correctly.
 
 **Interactive wizard (no arguments):**
 ```bash
-npm create liferay-react-ce
+npm create liferay-react-cx
 ```
 
 ---
 
 ### Method 2 — `npx` (No Install)
 
-Use `npx` to run the CLI directly without installing anything globally. The full package name `create-liferay-react-ce` is used here.
+Use `npx` to run the CLI directly without installing anything globally. The full package name `create-liferay-react-cx` is used here.
 
 **With a project name:**
 ```bash
-npx create-liferay-react-ce my-widget
+npx create-liferay-react-cx my-widget
 ```
 
 **With a specific React version:**
 ```bash
-npx create-liferay-react-ce --name my-widget --react-version 18.2.0
+npx create-liferay-react-cx --name my-widget --react-version 18.2.0
 ```
 
 **Interactive wizard:**
 ```bash
-npx create-liferay-react-ce
+npx create-liferay-react-cx
 ```
-
----
-
-### Method 3 — Global Install
-
-Install once, use anywhere. After a global install, you can use the short alias `liferay-react-ce` from any directory.
-
-**Step 1 — Install globally:**
-```bash
-npm install -g create-liferay-react-ce
-```
-
-**Step 2 — Use it:**
-```bash
-liferay-react-ce my-widget
-liferay-react-ce --name my-widget --react-version 18.2.0
-liferay-react-ce --help
-```
-
-> **Tip:** To update a globally installed version later, run `npm update -g create-liferay-react-ce`.
 
 ---
 
@@ -145,9 +124,9 @@ liferay-react-ce --help
 Run the CLI with no arguments to enter the interactive wizard:
 
 ```bash
-npm create liferay-react-ce
+npx create-liferay-react-cx
 # or
-npx create-liferay-react-ce
+npm create liferay-react-cx
 ```
 
 You will be asked:
@@ -258,7 +237,7 @@ Contributions, issues, and feature requests are welcome!
 ```bash
 # 1. Clone the repo
 git clone https://github.com/laxitkhanpara/liferay-react-ce.git
-cd liferay-react-ce
+cd liferay-react-cx
 
 # 2. Install dependencies
 npm install
@@ -282,7 +261,7 @@ Please open an [issue](https://github.com/laxitkhanpara/liferay-react-ce/issues)
 
 ## Links
 
-- 📦 [npm package](https://www.npmjs.com/package/create-liferay-react-ce)
+- 📦 [npm package](https://www.npmjs.com/package/create-liferay-react-cx)
 - 🐛 [Report a bug](https://github.com/laxitkhanpara/liferay-react-ce/issues)
 - 📖 [Liferay Client Extensions docs](https://learn.liferay.com/dxp/latest/en/building-applications/client-extensions.html)
 - 🏗️ [Liferay Workspace docs](https://learn.liferay.com/dxp/latest/en/building-applications/tooling/liferay-workspace/what-is-liferay-workspace.html)

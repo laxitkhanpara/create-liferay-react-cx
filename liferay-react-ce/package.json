@@ -1,13 +1,13 @@
 {
-  "name": "liferay-react-ce",
-  "version": "1.0.2",
-  "description": "CLI scaffold tool to generate Liferay React Client Extension (custom element) projects — zero-config, Vite-powered, Liferay 7.4+ compatible.",
+  "name": "create-liferay-react-cx",
+  "version": "1.0.1",
+  "description": "Zero-config CLI to scaffold Liferay React Client Extensions (custom element) — Vite-powered, shadow DOM isolated, ready to deploy.",
   "type": "module",
   "main": "./bin/index.js",
   "bin": {
-    "create-liferay-react-ce": "./bin/index.js",
-    "liferay-react-ce": "./bin/index.js"
+    "create-liferay-react-cx": "./bin/index.js"
   },
+  "preferGlobal": false,
   "keywords": [
     "liferay",
     "client-extension",
@@ -16,9 +16,12 @@
     "vite",
     "scaffold",
     "cli",
+    "generator",
     "liferay-dxp",
     "liferay-portal",
-    "web-component"
+    "web-component",
+    "create",
+    "boilerplate"
   ],
   "author": {
     "name": "Laxit Khanpara",
@@ -28,12 +31,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/laxitkhanpara/liferay-react-ce.git"
+    "url": "git+https://github.com/laxitkhanpara/create-liferay-react-cx.git"
   },
   "bugs": {
-    "url": "https://github.com/laxitkhanpara/liferay-react-ce/issues"
+    "url": "https://github.com/laxitkhanpara/create-liferay-react-cx/issues"
   },
-  "homepage": "https://github.com/laxitkhanpara/liferay-react-ce#readme",
+  "homepage": "https://github.com/laxitkhanpara/create-liferay-react-cx#readme",
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
