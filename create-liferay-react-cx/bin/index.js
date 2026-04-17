@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 
 const commandName = 'create-liferay-react-cx';
 
-const PKG_VERSION = '1.0.1';
+const PKG_VERSION = '1.0.3';
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 

@@ -1,11 +1,11 @@
 {
   "name": "create-liferay-react-cx",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Zero-config CLI to scaffold Liferay React Client Extensions (custom element) — Vite-powered, shadow DOM isolated, ready to deploy.",
   "type": "module",
   "main": "./bin/index.js",
   "bin": {
-    "create-liferay-react-cx": "./bin/index.js"
+    "create-liferay-react-cx": "bin/index.js"
   },
   "preferGlobal": false,
   "keywords": [
