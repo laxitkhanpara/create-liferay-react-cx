@@ -98,6 +98,8 @@ ${chalk.bold('create-liferay-react-cx')} — Scaffold a Liferay React Client Ext
 ${chalk.bold('USAGE')}
   create-liferay-react-cx [app-name] [react-version]
   create-liferay-react-cx --name <app-name> [--react-version <version>]
+
+${chalk.bold('OPTIONS')}
   -n, --name            App name in kebab-case  (e.g. my-widget)
   -r, --react-version   React version to use    (default: 16.12.0)
   -v, --version         Print version
@@ -107,6 +109,12 @@ ${chalk.bold('EXAMPLES')}
   npx create-liferay-react-cx my-widget
   npx create-liferay-react-cx --name my-widget --react-version 18.2.0
   npx create-liferay-react-cx                        # interactive mode
+
+${chalk.bold('FEATURES')}
+  • JavaScript or TypeScript support
+  • Vite-powered development
+  • Shadow DOM isolated components
+  • Ready for Liferay deployment
 
 ${chalk.bold('AFTER SCAFFOLDING')}
   cd <app-name>
@@ -133,6 +141,7 @@ ${chalk.dim('https://github.com/laxitkhanpara/create-liferay-react-cx')}
   if (appNameArg) {
     answers = {
       appName: appNameArg,
+      language: 'javascript',
       reactVersion: reactVersionArg || '16.12.0',
       installDeps: true,
     };
@@ -147,6 +156,16 @@ ${chalk.dim('https://github.com/laxitkhanpara/create-liferay-react-cx')}
             ? true
             : chalk.red('Use lowercase kebab-case — e.g. my-widget'),
         filter: (v) => v.trim(),
+      },
+      {
+        type: 'list',
+        name: 'language',
+        message: chalk.cyan('Choose language:'),
+        choices: [
+          { name: 'JavaScript', value: 'javascript' },
+          { name: 'TypeScript', value: 'typescript' },
+        ],
+        default: 'javascript',
       },
       {
         type: 'list',
@@ -181,9 +200,14 @@ ${chalk.dim('https://github.com/laxitkhanpara/create-liferay-react-cx')}
     }
   }
 
-  const { appName, reactVersion, installDeps } = answers;
+  const { appName, language, reactVersion, installDeps } = answers;
   const projectPath = path.resolve(process.cwd(), appName);
-  const templatePath = path.join(__dirname, '..', 'templates', 'custom-element');
+  const templatePath = path.join(
+    __dirname,
+    '..',
+    'templates',
+    language === 'typescript' ? 'custom-element-ts' : 'custom-element'
+  );
 
   // Guard: existing directory
   if (fs.existsSync(projectPath)) {
@@ -234,6 +258,11 @@ ${chalk.dim('https://github.com/laxitkhanpara/create-liferay-react-cx')}
     devDependencies: {
       '@vitejs/plugin-react': '^4.3.3',
       vite: '^4.4.9',
+      ...(language === 'typescript' && {
+        typescript: '^5.3.3',
+        '@types/react': '^18.2.43',
+        '@types/react-dom': '^18.2.17',
+      }),
     },
   };
 

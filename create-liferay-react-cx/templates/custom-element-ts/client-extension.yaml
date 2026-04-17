@@ -1,0 +1,17 @@
+assemble:
+    - from: vite-build
+      into: static
+
+__APP_NAME__:
+    cssURLs:
+        - assets/*.css
+    friendlyURLMapping: __APP_NAME__
+    htmlElementName: __APP_NAME__
+    instanceable: false
+    name: __APP_NAME__
+    portletCategoryName: category.client-extensions
+    type: customElement
+    urls:
+        - assets/*.js
+    useESM: true
+    liferay.virtual.instance.id: default
