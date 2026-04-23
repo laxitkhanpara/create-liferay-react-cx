@@ -83,10 +83,10 @@ function printBanner() {
         name: 'reactVersion',
         message: chalk.cyan('React version (Liferay-provided):'),
         choices: [
-          { name: '16.12.0  (Liferay 7.4 / DXP classic)', value: '16.12.0' },
           { name: '18.3.1   (Liferay 7.4 U45+ / DXP 2024.Q1+)', value: '18.3.1' },
+          { name: '16.12.0  (Liferay 7.4 / DXP classic)', value: '16.12.0' },
         ],
-        default: '16.12.0',
+        default: '18.3.1',
       },
       {
         type: 'confirm',
@@ -127,7 +127,7 @@ function printBanner() {
       filePath.endsWith('README.md')
     ) {
       const isReact18 = reactVersion.startsWith('18');
-      
+
       const vRemove = isReact18 ? '@react-16' : '@react-18';
       const vKeep = isReact18 ? '@react-18' : '@react-16';
 
@@ -138,13 +138,13 @@ function printBanner() {
         .split('\n')
         .filter((line) => !line.includes(vRemove) && !line.includes(sRemove))
         .map((line) => {
-            if (line.includes(vKeep) || line.includes(sKeep)) {
-                return line.replace(/^\s*\/\/\s*/, '')
-                           .replace(vKeep, '')
-                           .replace(sKeep, '')
-                           .trimEnd();
-            }
-            return line;
+          if (line.includes(vKeep) || line.includes(sKeep)) {
+            return line.replace(/^\s*\/\/\s*/, '')
+              .replace(vKeep, '')
+              .replace(sKeep, '')
+              .trimEnd();
+          }
+          return line;
         })
         .join('\n');
     }
@@ -163,7 +163,7 @@ function printBanner() {
 
   // 3. Generate package.json
   process.stdout.write(chalk.blue('  📦  Writing package.json…'));
-  
+
   const isReact18 = reactVersion.startsWith('18');
   const typeVersion = isReact18 ? '^18.3.1' : '^16.12.0';
 
