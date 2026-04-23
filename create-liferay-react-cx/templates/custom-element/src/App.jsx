@@ -1,5 +1,5 @@
-import React from 'react';
 import './assets/style.css';
+import React from 'react';
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
         <header className="lce-header">
           <h1 className="lce-title">__APP_NAME__</h1>
           <p className="lce-subtitle">
-            React {React.version}
+            Successfully deployed as a Liferay Client Extension.
           </p>
         </header>
       </div>

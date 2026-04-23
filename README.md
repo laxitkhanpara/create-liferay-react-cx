@@ -74,7 +74,7 @@ npm create liferay-react-cx my-widget
 
 **With a specific React version:**
 ```bash
-npm create liferay-react-cx -- --name my-widget --react-version 18.2.0
+npm create liferay-react-cx -- --name my-widget --react-version 18.3.1
 ```
 > ⚠️ Note the `--` before flags — this is required when using `npm create` with named options, so npm passes them through to the CLI correctly.
 
@@ -96,7 +96,7 @@ npx create-liferay-react-cx my-widget
 
 **With a specific React version:**
 ```bash
-npx create-liferay-react-cx --name my-widget --react-version 18.2.0
+npx create-liferay-react-cx --name my-widget --react-version 18.3.1
 ```
 
 **Interactive wizard:**
@@ -132,11 +132,23 @@ npm create liferay-react-cx
 You will be asked:
 
 1. **App name** — enter a kebab-case name for your widget
-2. **React version** — choose from a list or enter a custom version:
-   - `16.12.0` — Liferay 7.4 / DXP classic
-   - `18.2.0` — Liferay 7.4 U45+ / DXP 2024.Q1+
-   - `Custom` — enter any valid semver (e.g. `17.0.2`)
-3. **Install dependencies now?** — yes/no confirm
+2. **Choose language** — select between **JavaScript** or **TypeScript**
+3. **React version** — choose from a list (16.12.0 or 18.3.1)
+4. **Use Shadow DOM?** — decide if you want strict style isolation and slots support
+
+### When to use Shadow DOM?
+
+**✅ Yes (Recommended for most apps)**
+Select **Yes** if you want your widget's styles to be **completely isolated**.
+- Your CSS will not affect the rest of the Liferay page.
+- Liferay's global CSS (like Clay UI styles or portal themes) will not accidentally override your widget's design.
+- Highly recommended for complex widgets, third-party integrations, or when using custom CSS frameworks like Tailwind.
+
+**❌ No**
+Select **No** if you want your widget to **inherit Liferay's global styles**.
+- Your widget will seamlessly pick up the portal's fonts, colors, and Clay UI themes.
+- CSS written in your widget *could* leak out and affect other elements on the page if not scoped properly.
+- Recommended if you rely heavily on Liferay's Clay UI components and want them to perfectly match the portal theme.
 
 ---
 
@@ -144,19 +156,22 @@ You will be asked:
 
 Running the CLI creates the following layout:
 
-```
+```text
 my-widget/
 ├── client-extension.yaml     ← Liferay CE descriptor (auto-configured)
 ├── index.html                ← Vite dev-server entry point
 ├── package.json              ← Project dependencies & scripts
-├── vite.config.js            ← Vite build config
-├── eslint.config.js          ← ESLint flat config
+├── vite.config.[js|ts]       ← Vite build config
+├── [tsconfig.json]           ← TS only: TypeScript config
 └── src/
-    ├── main.jsx              ← Web Component registration (HTMLElement)
-    ├── App.jsx               ← Your React component — start editing here
-    ├── index.css             ← Global reset (shadow DOM scoped)
+    ├── main.[jsx|tsx]      ← Web Component registration (HTMLElement)
+    ├── App.[jsx|tsx]       ← Your React component — start editing here
+    ├── index.css           ← Global reset (shadow DOM scoped)
+    ├── util/               ← Liferay helper utilities (Mocks + Styles)
+    │   ├── Liferay.[js|ts]
+    │   └── setupShadowRootStyles.[js|ts]
     └── assets/
-        └── style.css         ← Component styles (shadow DOM isolated)
+        └── style.css       ← Component styles (shadow DOM isolated)
 ```
 
 ### What `client-extension.yaml` does
@@ -164,16 +179,29 @@ my-widget/
 This file tells Liferay how to register and display your widget:
 
 ```yaml
+assemble:
+    - from: vite-build
+      into: static
+
+# Import map entry for importing the element in custom fragments
 my-widget:
-  type: customElement          # renders as <my-widget> on Liferay pages
-  htmlElementName: my-widget   # the HTML tag name
-  urls:
-    - assets/*.js              # built JS bundle from vite-build/
-  cssURLs:
-    - assets/*.css             # built CSS bundle from vite-build/
-  useESM: true                 # ES module support
-  instanceable: false          # one instance per page
-  portletCategoryName: category.client-extensions
+    bareSpecifier: my-widget
+    name: my-widget
+    type: jsImportMapsEntry
+    url: assets/index.js
+
+# Custom element definition
+my-widget-element:
+    friendlyURLMapping: my-widget
+    htmlElementName: my-widget
+    instanceable: false
+    name: my-widget
+    portletCategoryName: category.client-extensions
+    type: customElement
+    urls:
+        - assets/*.js
+    useESM: true
+    liferay.virtual.instance.id: default
 ```
 
 All values are automatically replaced with your app name during scaffolding.
@@ -224,9 +252,9 @@ npm run dev       # starts at http://localhost:5173
 | React Version | Liferay Compatibility | Notes |
 |:---:|:---|:---|
 | `16.12.0` | Liferay 7.4 GA / DXP classic | Uses Liferay's bundled React. Smaller bundle. |
-| `18.2.0` | Liferay 7.4 U45+ / DXP 2024.Q1+ | Fully isolated in shadow DOM. Concurrent features. |
+| `18.3.1` | Liferay 7.4 U45+ / DXP 2024.Q1+ | Fully isolated in shadow DOM. Concurrent features. |
 
-Not sure which to pick? Use `16.12.0` for maximum compatibility with older Liferay instances, or `18.2.0` for newer deployments that support isolated client extensions.
+Not sure which to pick? Use `16.12.0` for maximum compatibility with older Liferay instances, or `18.3.1` for newer deployments that support isolated client extensions.
 
 ---
 

@@ -70,7 +70,7 @@ Before submitting:
 ```bash
 # Test with different arguments
 node bin/index.js my-app
-node bin/index.js --name test-app --react-version 18.2.0
+node bin/index.js --name test-app --react-version 18.3.1
 node bin/index.js --help
 ```
 

@@ -60,7 +60,7 @@ Enterprise-ready TypeScript template with full type safety and modern developmen
 ✅ **Vite-Powered** - Lightning-fast development and optimized builds
 ✅ **Web Components** - Native custom element support
 ✅ **Liferay Ready** - Pre-configured for Liferay DXP deployment
-✅ **Modern React** - Supports React 16.12.0, 18.2.0, and custom versions
+✅ **Modern React** - Supports React 16.12.0 and 18.3.1
 ✅ **Professional Styling** - Modern gradient-based design system
 ✅ **ESM Support** - Full ES Module support
 
@@ -102,11 +102,10 @@ Enterprise-ready TypeScript template with full type safety and modern developmen
 
 Both templates follow the same organizational structure:
 
-```
+```text
 template/
 ├── .gitignore              # Git ignore rules
 ├── client-extension.yaml   # Liferay manifest
-├── eslint.config.js        # ESLint rules
 ├── index.html              # HTML entry
 ├── vite.config.[js|ts]     # Vite configuration
 ├── [tsconfig.json]         # TS only: TypeScript config
@@ -114,6 +113,9 @@ template/
     ├── App.[jsx|tsx]       # React component
     ├── index.css           # Base styles
     ├── main.[jsx|tsx]      # Web Component init
+    ├── util/
+    │   ├── Liferay.[js|ts] # Liferay global object mock
+    │   └── setupShadowRootStyles.[js|ts]
     └── assets/
         └── style.css       # Component styles
 ```

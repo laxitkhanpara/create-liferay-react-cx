@@ -5,19 +5,16 @@ import chalk from 'chalk';
 import fs from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { execa } from 'execa';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const commandName = 'create-liferay-react-cx';
-
-const PKG_VERSION = '1.0.3';
+const PKG_VERSION = '1.0.5';
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
 const args = process.argv.slice(2);
-
 const hasFlag = (flags) => flags.some((f) => args.includes(f));
 
 const getArgValue = (names) => {
@@ -31,98 +28,17 @@ const positionalArgs = args.filter((a) => !a.startsWith('-'));
 
 function printBanner() {
   console.log('');
-
-  console.log(
-    chalk.bold.hex('#0B5FFF')(
-      '   ██╗     ██╗███████╗███████╗██████╗  █████╗ ██╗   ██╗'
-    )
-  );
-  console.log(
-    chalk.bold.hex('#0B5FFF')(
-      '   ██║     ██║██╔════╝██╔════╝██╔══██╗██╔══██╗╚██╗ ██╔╝'
-    )
-  );
-  console.log(
-    chalk.bold.hex('#0B5FFF')(
-      '   ██║     ██║█████╗  █████╗  ██████╔╝███████║ ╚████╔╝ '
-    )
-  );
-  console.log(
-    chalk.bold.hex('#0B5FFF')(
-      '   ██║     ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║  ╚██╔╝  '
-    )
-  );
-  console.log(
-    chalk.bold.hex('#0B5FFF')(
-      '   ███████╗██║██║     ███████╗██║  ██║██║  ██║   ██║   '
-    )
-  );
-  console.log(
-    chalk.bold.hex('#0B5FFF')(
-      '   ╚══════╝╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   '
-    )
-  );
-
+  console.log(chalk.bold.hex('#0B5FFF')('   ██╗     ██╗███████╗███████╗██████╗  █████╗ ██╗   ██╗'));
+  console.log(chalk.bold.hex('#0B5FFF')('   ██║     ██║██╔════╝██╔════╝██╔══██╗██╔══██╗╚██╗ ██╔╝'));
+  console.log(chalk.bold.hex('#0B5FFF')('   ██║     ██║█████╗  █████╗  ██████╔╝███████║ ╚████╔╝ '));
+  console.log(chalk.bold.hex('#0B5FFF')('   ██║     ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║  ╚██╔╝  '));
+  console.log(chalk.bold.hex('#0B5FFF')('   ███████╗██║██║     ███████╗██║  ██║██║  ██║   ██║   '));
+  console.log(chalk.bold.hex('#0B5FFF')('   ╚══════╝╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   '));
   console.log('');
-
-  console.log(
-    chalk.bold('   Liferay React Client Extension')
-  );
-
-  console.log(
-    chalk.dim('   Official-style scaffolding tool for Liferay DXP')
-  );
-
-  console.log(
-    chalk.dim(`   Version: ${PKG_VERSION}`)
-  );
-
-  console.log(
-    chalk.dim('   ─────────────────────────────────────────────')
-  );
-
+  console.log(chalk.bold('   Liferay React Client Extension Scaffolding'));
+  console.log(chalk.dim(`   Version: ${PKG_VERSION}`));
+  console.log(chalk.dim('   ─────────────────────────────────────────────'));
   console.log('');
-}
-
-// ─── Version / Help ──────────────────────────────────────────────────────────
-
-if (hasFlag(['--version', '-v'])) {
-  console.log(`create-liferay-react-cx v${PKG_VERSION}`);
-  process.exit(0);
-}
-
-if (hasFlag(['--help', '-h'])) {
-  console.log(`
-${chalk.bold('create-liferay-react-cx')} — Scaffold a Liferay React Client Extension
-
-${chalk.bold('USAGE')}
-  create-liferay-react-cx [app-name] [react-version]
-  create-liferay-react-cx --name <app-name> [--react-version <version>]
-
-${chalk.bold('OPTIONS')}
-  -n, --name            App name in kebab-case  (e.g. my-widget)
-  -r, --react-version   React version to use    (default: 16.12.0)
-  -v, --version         Print version
-  -h, --help            Show this help
-
-${chalk.bold('EXAMPLES')}
-  npx create-liferay-react-cx my-widget
-  npx create-liferay-react-cx --name my-widget --react-version 18.2.0
-  npx create-liferay-react-cx                        # interactive mode
-
-${chalk.bold('FEATURES')}
-  • JavaScript or TypeScript support
-  • Vite-powered development
-  • Shadow DOM isolated components
-  • Ready for Liferay deployment
-
-${chalk.bold('AFTER SCAFFOLDING')}
-  cd <app-name>
-  ../../gradlew deploy    # deploy to Liferay
-
-${chalk.dim('https://github.com/laxitkhanpara/create-liferay-react-cx')}
-`);
-  process.exit(0);
 }
 
 // ─── Main ────────────────────────────────────────────────────────────────────
@@ -130,12 +46,9 @@ ${chalk.dim('https://github.com/laxitkhanpara/create-liferay-react-cx')}
 (async () => {
   printBanner();
 
-  // Resolve inputs
   const appNameArg = getArgValue(['--name', '-n']) || positionalArgs[0];
-  const reactVersionArg =
-    getArgValue(['--react-version', '-r']) || positionalArgs[1];
+  const reactVersionArg = getArgValue(['--react-version', '-r']) || positionalArgs[1];
 
-  // Interactive prompts only for missing fields
   let answers;
 
   if (appNameArg) {
@@ -143,7 +56,7 @@ ${chalk.dim('https://github.com/laxitkhanpara/create-liferay-react-cx')}
       appName: appNameArg,
       language: 'javascript',
       reactVersion: reactVersionArg || '16.12.0',
-      installDeps: true,
+      useShadow: false,
     };
   } else {
     answers = await inquirer.prompt([
@@ -152,9 +65,7 @@ ${chalk.dim('https://github.com/laxitkhanpara/create-liferay-react-cx')}
         name: 'appName',
         message: chalk.cyan('App name') + chalk.dim(' (kebab-case):'),
         validate: (input) =>
-          /^[a-z][a-z0-9-]*$/.test(input.trim())
-            ? true
-            : chalk.red('Use lowercase kebab-case — e.g. my-widget'),
+          /^[a-z][a-z0-9-]*$/.test(input.trim()) ? true : chalk.red('Use kebab-case — e.g. my-widget'),
         filter: (v) => v.trim(),
       },
       {
@@ -170,37 +81,23 @@ ${chalk.dim('https://github.com/laxitkhanpara/create-liferay-react-cx')}
       {
         type: 'list',
         name: 'reactVersion',
-        message: chalk.cyan('React version:'),
+        message: chalk.cyan('React version (Liferay-provided):'),
         choices: [
           { name: '16.12.0  (Liferay 7.4 / DXP classic)', value: '16.12.0' },
-          { name: '18.2.0   (Liferay 7.4 U45+ / DXP 2024.Q1+)', value: '18.2.0' },
-          { name: 'Custom   (enter manually)', value: '__custom__' },
+          { name: '18.3.1   (Liferay 7.4 U45+ / DXP 2024.Q1+)', value: '18.3.1' },
         ],
         default: '16.12.0',
       },
       {
-        type: 'input',
-        name: 'reactVersionCustom',
-        message: chalk.cyan('Enter React version:'),
-        when: (prev) => prev.reactVersion === '__custom__',
-        validate: (v) =>
-          /^\d+\.\d+\.\d+/.test(v.trim()) ? true : 'Enter a valid semver e.g. 17.0.2',
-        filter: (v) => v.trim(),
-      },
-      {
         type: 'confirm',
-        name: 'installDeps',
-        message: chalk.cyan('Install npm dependencies now?'),
-        default: true,
+        name: 'useShadow',
+        message: chalk.cyan('Use Shadow DOM?') + chalk.dim(' (isolation + slots):'),
+        default: false,
       },
     ]);
-
-    if (answers.reactVersion === '__custom__') {
-      answers.reactVersion = answers.reactVersionCustom;
-    }
   }
 
-  const { appName, language, reactVersion, installDeps } = answers;
+  const { appName, language, reactVersion, useShadow } = answers;
   const projectPath = path.resolve(process.cwd(), appName);
   const templatePath = path.join(
     __dirname,
@@ -209,23 +106,49 @@ ${chalk.dim('https://github.com/laxitkhanpara/create-liferay-react-cx')}
     language === 'typescript' ? 'custom-element-ts' : 'custom-element'
   );
 
-  // Guard: existing directory
   if (fs.existsSync(projectPath)) {
-    console.error(
-      chalk.red(`\n  ✖  Directory "${appName}" already exists. Choose a different name.\n`)
-    );
+    console.error(chalk.red(`\n  ✖  Directory "${appName}" already exists.\n`));
     process.exit(1);
   }
 
-  // ── Step 1: Copy template ──────────────────────────────────────────────────
+  // 1. Copy Templates
   process.stdout.write(chalk.blue('\n  📁  Scaffolding project…'));
   await fs.copy(templatePath, projectPath);
   console.log(chalk.green('  ✔'));
 
-  // ── Step 2: Replace __APP_NAME__ placeholders ─────────────────────────────
+  // 2. Process Files & Placeholders
   const replaceInFile = (filePath) => {
     let content = fs.readFileSync(filePath, 'utf-8');
     content = content.replace(/__APP_NAME__/g, appName);
+
+    if (
+      filePath.endsWith('main.tsx') ||
+      filePath.endsWith('main.jsx') ||
+      filePath.endsWith('README.md')
+    ) {
+      const isReact18 = reactVersion.startsWith('18');
+      
+      const vRemove = isReact18 ? '@react-16' : '@react-18';
+      const vKeep = isReact18 ? '@react-18' : '@react-16';
+
+      const sRemove = useShadow ? '@shadow-n' : '@shadow-y';
+      const sKeep = useShadow ? '@shadow-y' : '@shadow-n';
+
+      content = content
+        .split('\n')
+        .filter((line) => !line.includes(vRemove) && !line.includes(sRemove))
+        .map((line) => {
+            if (line.includes(vKeep) || line.includes(sKeep)) {
+                return line.replace(/^\s*\/\/\s*/, '')
+                           .replace(vKeep, '')
+                           .replace(sKeep, '')
+                           .trimEnd();
+            }
+            return line;
+        })
+        .join('\n');
+    }
+
     fs.writeFileSync(filePath, content);
   };
 
@@ -238,8 +161,11 @@ ${chalk.dim('https://github.com/laxitkhanpara/create-liferay-react-cx')}
 
   walk(projectPath);
 
-  // ── Step 3: Write package.json ────────────────────────────────────────────
+  // 3. Generate package.json
   process.stdout.write(chalk.blue('  📦  Writing package.json…'));
+  
+  const isReact18 = reactVersion.startsWith('18');
+  const typeVersion = isReact18 ? '^18.3.1' : '^16.12.0';
 
   const projectPackageJson = {
     name: appName,
@@ -249,6 +175,7 @@ ${chalk.dim('https://github.com/laxitkhanpara/create-liferay-react-cx')}
     scripts: {
       dev: 'vite',
       build: 'vite build',
+      lint: 'eslint .',
       preview: 'vite preview',
     },
     dependencies: {
@@ -257,52 +184,29 @@ ${chalk.dim('https://github.com/laxitkhanpara/create-liferay-react-cx')}
     },
     devDependencies: {
       '@vitejs/plugin-react': '^4.3.3',
+      'vite-plugin-css-injected-by-js': '^3.4.0',
       vite: '^4.4.9',
+      eslint: '^9.13.0',
+      '@eslint/js': '^9.13.0',
+      'globals': '^15.11.0',
+      'eslint-plugin-react': '^7.37.2',
+      'eslint-plugin-react-hooks': '^5.0.0',
+      'eslint-plugin-react-refresh': '^0.4.14',
       ...(language === 'typescript' && {
         typescript: '^5.3.3',
-        '@types/react': '^18.2.43',
-        '@types/react-dom': '^18.2.17',
+        'typescript-eslint': '^8.13.0',
+        '@types/react': typeVersion,
+        '@types/react-dom': typeVersion,
       }),
     },
   };
 
-  fs.writeJsonSync(path.join(projectPath, 'package.json'), projectPackageJson, {
-    spaces: 2,
-  });
+  fs.writeJsonSync(path.join(projectPath, 'package.json'), projectPackageJson, { spaces: 2 });
   console.log(chalk.green('  ✔'));
 
-  // ── Step 4: Install dependencies ──────────────────────────────────────────
-  if (installDeps !== false) {
-    console.log(chalk.blue('\n  📥  Installing dependencies…\n'));
-    try {
-      await execa('npm', ['install'], { cwd: projectPath, stdio: 'inherit' });
-    } catch {
-      console.warn(
-        chalk.yellow(
-          '\n  ⚠  npm install failed. Run it manually inside the project folder.\n'
-        )
-      );
-    }
-  }
-
   // ── Done ──────────────────────────────────────────────────────────────────
-  console.log('');
-  console.log(
-    chalk.bold.green('  ✅  Project created successfully!\n')
-  );
+  console.log(chalk.bold.green('\n  ✅  Project created successfully!\n'));
   console.log(chalk.bold('  Next steps:\n'));
   console.log(chalk.cyan(`    cd ${appName}`));
-  if (installDeps === false) {
-    console.log(chalk.cyan('    npm install'));
-  }
-  console.log(
-    chalk.cyan('    ../../gradlew deploy') + chalk.dim('   # deploy to Liferay')
-  );
-  console.log('');
-  console.log(
-    chalk.dim(
-      '  Docs: https://learn.liferay.com/dxp/latest/en/building-applications/client-extensions.html'
-    )
-  );
-  console.log('');
+  console.log(chalk.cyan('    ../../gradlew deploy') + chalk.dim('   # deploy to Liferay\n'));
 })();
